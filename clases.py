@@ -4,16 +4,17 @@ import os
 import cv2
 import pydicom
 
-dic_data = {}
-dic_pac = {}
-
-class Paciente:
+class sistema:
 
     def __init__(self):
+        self.__archivo = ''
+class Paciente(sistema):
 
+    def __init__(self):
+        super().__init__()
         self.__nombre = ''
-        self.__edad = ''
-        self.__id = ''
+        self.__edad = 0
+        self.__id = 0
         self.__imagen = ''
 
     def get_nombre(self):
@@ -25,11 +26,3 @@ class Paciente:
     def get_imagen(self):    
         return self.__imagen
     
-    def set_nombre(self, nombre):
-        self.__nombre = nombre
-    def set_edad(self, edad):
-        self.__edad = edad
-    def set_id(self, id):
-        self.__id = id
-    def set_imagen(self, imagen):
-        self.__imagen = imagen
