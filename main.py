@@ -10,20 +10,20 @@ def main():
             ruta = input(r"Ingrese la ruta de la carpeta del paciente: ")
             ran_id = random.randint(1, 1000)
             carpeta = archivador()
-            dicom = carpeta.extraer_archivos(ruta)
+            carpeta.extraer_archivos(ruta)
             nombre, id, edad = carpeta.datos_paciente()
             paciente = Paciente(nombre, edad, id)
             imagenes = carpeta.extraer_imagen(ruta)
             paciente.set_imagenes(imagenes)
             dic_pac[ran_id] = paciente
-            dic_data[ran_id] = dicom
+            dic_data[ran_id] = carpeta
             print("Paciente ingresado con exito con el siguiente ID: ", ran_id)
         elif menu_1 == 2:
             ruta = input(r"Ingrese la ruta de la imagen en formato JPG O PNG a subir: ")
             ran_id = random.randint(1, 1000)
-            carpeta = archivador()
-            imagen = carpeta.ingresar_imagen(ruta)
-            dic_data[ran_id] = imagen
+            imagen_format = archivador()
+            imagen_format.ingresar_imagen(ruta)
+            dic_data[ran_id] = imagen_format
             print("Imagen ingresada con exito con el siguiente ID: ", ran_id)
         elif menu_1 == 3:
             id = int(input("Ingrese el ID de la carpeta DICOM: "))

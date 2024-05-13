@@ -12,6 +12,12 @@ class archivador:
     def __init__(self):
         self.__archivos = []
 
+    def set_archivos(self, archivos):
+        self.__archivos.append(archivos)
+
+    def get_archivos(self):
+        return self.__archivos
+
     def extraer_archivos(self, ruta):
         archivos = os.listdir(ruta)
         for archivo in archivos:
@@ -19,7 +25,7 @@ class archivador:
                 ruta_dicom = os.path.join(ruta, archivo)
                 dicom = pydicom.dcmread(ruta_dicom) 
                 self.__archivos.append(dicom)
-        return self.__archivos
+
     def datos_paciente(self):
         nombre = self.__archivos[0].PatientName
         id = self.__archivos[0].PatientID
@@ -50,11 +56,12 @@ class archivador:
     
     def ingresar_imagen(self, ruta):
         imagen = cv2.imread(ruta)
-        return imagen
+        self.__archivos.append(imagen)
     
     def rotar_imagen(self,dic,id):
         if id in dic:
-                dicom = dic[id]
+                archivos = dic[id]
+                dicom = archivos.get_archivos()
                 posicion = int(input(f"Cual es la imagen que decea transformar del paciente, escoja etre 0 y {len(dicom)-1}: "))
                 if 0 <= posicion <= (len(dicom)-1):
                     imagen = dicom[posicion].pixel_array
@@ -75,7 +82,7 @@ class archivador:
                                     elif precont_2 >= subcont_2:
                                         cont_2 = precont_2
                             cont_2 = precont_2
-                            cont_2 +=1
+                            cont_2 +=1 #HACER FUNCION
                             cv2.imwrite(f'D:\Programas Py\Informatica 2\Parcial 3 info 2\Rotaciones\Rotacion_{cont_2}.JPG',rotacion)
                             plt.subplot(1, 2, 1)
                             plt.imshow(rotacion)
