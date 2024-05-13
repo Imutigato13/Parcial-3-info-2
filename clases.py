@@ -99,6 +99,37 @@ class archivador:
                             print("Angulo no valido")
                 else:
                     print("Posicion no valida")
+
+    def binzarizacion_transformacion(self,dic,id):
+
+        if id in dic:
+            imagen = dic[id]
+            imagen_format = imagen.get_archivos()[0]
+            img_1 = cv2.cvtColor(imagen_format, cv2.COLOR_BGR2GRAY)
+            media=np.mean(img_1)
+            tamaño = int(input("Ingrese el tamaño del kernel: "))
+            kernel = np.ones((tamaño,tamaño),np.uint8)
+            
+            Umb,img_2=cv2.threshold(img_1,media,256,cv2.THRESH_BINARY)
+            img_3=cv2.morphologyEx(img_2, cv2.MORPH_OPEN, kernel, iterations = 1)
+            print(Umb)
+            texto = (f"Umbral:{int(Umb)}-kernel:{tamaño}x{tamaño}")
+            color_texto = (255, 255, 255) if media < 110 else (0, 0, 0)
+            altura, anchura = img_3.shape[:2]
+            cv2.putText(img_3, texto, (10, altura - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5,color_texto, 1, cv2.LINE_AA)
+
+            plt.figure(figsize=(15,8))
+            plt.subplot(1,2,1)
+            plt.imshow(img_1, cmap='gray')
+            plt.title("Imagen original")
+            plt.axis('off')
+            plt.subplot(1,2,2)
+            plt.imshow(img_3, cmap='gray')
+            plt.title("Imagen binarizada y transformada")
+            plt.axis('off')
+
+            plt.show()
+
 class Paciente():
 
     def __init__(self, nombre, edad, id):
