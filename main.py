@@ -19,18 +19,22 @@ def main():
             dic_data[ran_id] = dicom
             print("Paciente ingresado con exito con el siguiente ID: ", ran_id)
         elif menu_1 == 2:
-            imagen = 1
-            dic_data[imagen.get_id()] = imagen
-            print("Imagen ingresada con exito")
+            ruta = input(r"Ingrese la ruta de la imagen en formato JPG O PNG a subir: ")
+            ran_id = random.randint(1, 1000)
+            carpeta = archivador()
+            imagen = carpeta.ingresar_imagen(ruta)
+            dic_data[ran_id] = imagen
+            print("Imagen ingresada con exito con el siguiente ID: ", ran_id)
         elif menu_1 == 3:
-            imagen = 2
-            dic_data[imagen.get_id()] = imagen
-            imagen.dicom_to_jpg()
+            id = int(input("Ingrese el ID de la carpeta DICOM: "))
+            carpeta = archivador()
+            carpeta.rotar_imagen(dic_data,id)
         elif menu_1 == 4:
             imagen = 3
             dic_data[imagen.get_id()] = imagen
             imagen.show_image()
         elif menu_1 == 5:
+            print("Gracias por usar el sistema")
             break
         else:
             print("Opcion no valida")
