@@ -61,10 +61,22 @@ class archivador:
                     while True:
                         theta = int(input("Ingrese el angulo de rotacion(90°,180°,270°): "))
                         if theta == 90 or theta == 180 or theta == 270:
-                            #imagen=cv2.cvtColor(imagen,cv2.COLOR_BGR2RGB)
-                            row, col, chn=np.shape(imagen)
+                            imagen = imagen.astype(np.uint8)
+                            imagen=cv2.cvtColor(imagen,cv2.COLOR_BGR2RGB)
+                            row,col,chn = np.shape(imagen)
                             MR = cv2.getRotationMatrix2D((col/2,row/2),theta,1)
                             rotacion = cv2.warpAffine(imagen,MR,(col,row))
+                            precont_2 = 0
+                            for filename in os.listdir(r'D:\Programas Py\Informatica 2\Parcial 3 info 2\Rotaciones'):
+                                if filename.endswith('.JPG'):
+                                    subcont_2 = int(filename.split(".")[0].split("_")[-1])
+                                    if precont_2 < subcont_2:
+                                        precont_2 = subcont_2
+                                    elif precont_2 >= subcont_2:
+                                        cont_2 = precont_2
+                            cont_2 = precont_2
+                            cont_2 +=1
+                            cv2.imwrite(f'D:\Programas Py\Informatica 2\Parcial 3 info 2\Rotaciones\Rotacion_{cont_2}.JPG',rotacion)
                             plt.subplot(1, 2, 1)
                             plt.imshow(rotacion)
                             plt.title("Imagen rotada")
