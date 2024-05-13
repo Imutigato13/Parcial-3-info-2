@@ -3,7 +3,8 @@ dic_data = {}
 dic_pac = {}
 
 def main():
-    print("Bienvenido al sistema de imagenes hospitalarias\n".center(90, "-"))
+    print("Bienvenido al sistema de imagenes hospitalarias".center(90, "-"))
+    print("")
     while True:
         menu_1 = int(input("1.Ingresar paciente\n2.Ingresar imagen JPG o PNG\n3.Transformacion de imagen DICOM\n4.Manipulacion de imagen JPG o PNG\n5.Salir\n:"))
         try:

@@ -112,7 +112,6 @@ class archivador:
             
             Umb,img_2=cv2.threshold(img_1,media,256,cv2.THRESH_BINARY)
             img_3=cv2.morphologyEx(img_2, cv2.MORPH_OPEN, kernel, iterations = 1)
-            print(Umb)
             texto = (f"Umbral:{int(Umb)}-kernel:{tamaño}x{tamaño}")
             color_texto = (255, 255, 255) if media < 110 else (0, 0, 0)
             altura, anchura = img_3.shape[:2]
