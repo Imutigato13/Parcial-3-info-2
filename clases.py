@@ -82,7 +82,7 @@ class archivador:
                                     elif precont_2 >= subcont_2:
                                         cont_2 = precont_2
                             cont_2 = precont_2
-                            cont_2 +=1 #HACER FUNCION
+                            cont_2 +=1 
                             cv2.imwrite(f'D:\Programas Py\Informatica 2\Parcial 3 info 2\Rotaciones\Rotacion_{cont_2}.JPG',rotacion)
                             plt.subplot(1, 2, 1)
                             plt.imshow(rotacion)
@@ -116,7 +116,18 @@ class archivador:
             color_texto = (255, 255, 255) if media < 110 else (0, 0, 0)
             altura, anchura = img_3.shape[:2]
             cv2.putText(img_3, texto, (10, altura - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5,color_texto, 1, cv2.LINE_AA)
-
+            precont_3 = 0
+            for filename in os.listdir(r'D:\Programas Py\Informatica 2\Parcial 3 info 2\Tranformaciones'):
+                                if filename.endswith('.JPG'):
+                                    subcont_3 = int(filename.split(".")[0].split("_")[-1])
+                                    if precont_3 < subcont_3:
+                                        precont_3 = subcont_3
+                                    elif precont_3 >= subcont_3:
+                                        cont_3 = precont_3
+                            
+            cont_3 = precont_3            
+            cont_3 +=1 
+            cv2.imwrite(f'D:\Programas Py\Informatica 2\Parcial 3 info 2\Tranformaciones\Transformacion_{cont_3}.JPG',img_3)
             plt.figure(figsize=(15,8))
             plt.subplot(1,2,1)
             plt.imshow(img_1, cmap='gray')
